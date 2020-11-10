@@ -111,6 +111,30 @@ public interface MessageProducer {
     void logMetric(String name, String status, String nameValuePairs);
 
     /**
+     * Log an trace in one shot with SUCCESS status.
+     *
+     * @param type
+     *           trace type
+     * @param name
+     *           trace name
+     */
+    void logTrace(String type, String name);
+
+    /**
+     * Log an trace in one shot.
+     *
+     * @param type
+     *           trace type
+     * @param name
+     *           trace name
+     * @param status
+     *           "0" means success, otherwise means error code
+     * @param nameValuePairs
+     *           name value pairs in the format of "a=1&b=2&..."
+     */
+    void logTrace(String type, String name, String status, String nameValuePairs);
+
+    /**
      * Create a new event with given type and name.
      *
      * @param type event type

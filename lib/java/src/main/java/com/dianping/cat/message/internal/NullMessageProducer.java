@@ -72,6 +72,14 @@ public class NullMessageProducer implements MessageProducer {
     }
 
     @Override
+    public void logTrace(String type, String name) {
+    }
+
+    @Override
+    public void logTrace(String type, String name, String status, String nameValuePairs) {
+    }
+
+    @Override
     public Event newEvent(String type, String name) {
         return NullMessage.EVENT;
     }

@@ -167,6 +167,25 @@ public class DefaultMessageProducer implements MessageProducer {
     }
 
     @Override
+    public void logTrace(String type, String name) {
+        logTrace(type, name, Message.SUCCESS, null);
+    }
+
+    @Override
+    public void logTrace(String type, String name, String status, String nameValuePairs) {
+        if (manager.isTraceMode()) {
+            Trace trace = newTrace(type, name);
+
+            if (nameValuePairs != null && nameValuePairs.length() > 0) {
+                trace.addData(nameValuePairs);
+            }
+
+            trace.setStatus(status);
+            trace.complete();
+        }
+    }
+
+    @Override
     public Event newEvent(String type, String name) {
         if (!manager.hasContext()) {
             manager.setup();
@@ -203,6 +222,10 @@ public class DefaultMessageProducer implements MessageProducer {
     public Trace newTrace(String type, String name) {
         if (!manager.hasContext()) {
             manager.setup();
+        }
+
+        if (!manager.isTraceMode()) {
+            return NullMessage.TRACE;
         }
 
         return new DefaultTrace(type, name, manager);

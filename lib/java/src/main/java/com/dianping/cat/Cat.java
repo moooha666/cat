@@ -660,6 +660,22 @@ public class Cat {
         }
     }
 
+    public static void logTrace(String type, String name) {
+        try {
+            Cat.getProducer().logTrace(type, name);
+        } catch (Exception e) {
+            errorHandler(e);
+        }
+    }
+
+    public static void logTrace(String type, String name, String status, String nameValuePairs) {
+        try {
+            Cat.getProducer().logTrace(type, name, status, nameValuePairs);
+        } catch (Exception e) {
+            errorHandler(e);
+        }
+    }
+
     private static void validate() {
         String enable = Properties.forString().fromEnv().fromSystem().getProperty("CAT_ENABLED", "true");
 
